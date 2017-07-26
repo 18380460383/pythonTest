@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+     <!-- 引入jQuery -->
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+     <!-- 引入 Bootstrap -->
+     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+      <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <title>MYSQL表列展示</title>
+    <style>
+        .flex-item {
+    width: 50%;
+    height: 75px;
+    margin: auto;
+            margin-top: 50px;
+}
+    </style>
+</head>
+<body >
+<frameset cols="50%,50%">
+<div class="flex-item">
+<form id="form1">
+<select class="form-control" name="name">
+    {% for item in results %}
+			<option>{{ item.name }}</option>
+    {% endfor %}
+  </select>
+</form>
+<button id="submit" type="button" class="btn btn-default" style="width: 50%">提交</button>
+</div>
+</frameset>
+</body>
+<script>
+    $(function () {
+        $("#submit").click(function () {
+           $.ajax({
+					type:"POST",
+				 	url:"/urlpost/",
+				 	async:true,
+				 	data:$("#form1").serialize(),
+					timeout : 5000, //超时时间
+					dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+					beforeSend : function(xhr) {
+					},
+					success : function(data, textStatus, jqXHR) {
+						alert(data);
+					},
+					error : function(xhr, textStatus) {
+						alert("提交成功，您也可以联系管理员(827748115@qq.com)！"+JSON.stringify(xhr)+"\n"+textStatus);
+					},
+					complete : function() {
+					}
+				});
+        });
+    });
+</script>
+</html>

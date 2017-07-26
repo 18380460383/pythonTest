@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+
+# 类定义
+class people(object):
+    # 定义基本属性
+    name = ''
+    age = 0
+    # 定义私有属性,私有属性在类外部无法直接进行访问
+    weight = 0
+
+    # 定义构造方法
+    def __init__(self, n, a, w):
+        self.name = n
+        self.age = a
+        self.weight = w
+
+    def speak(self):
+        print("%s 说: 我 %d 岁。" % (self.name, self.age))
+
+    @classmethod
+    def tet(self):
+        print('test')
+
+# 实例化类
+# p = people('runoob', 10, 30)
+# p.speak()

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+     <!-- 引入jQuery -->
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+     <!-- 引入 Bootstrap -->
+     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+      <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <title>MYSQL表列展示</title>
+    <style>
+        .flex-item {
+    width: 50%;
+    height: 75px;
+    margin: auto;
+            margin-top: 50px;
+}
+    </style>
+</head>
+<body align="center">
+<div class="flex-item">
+<form id="form1">
+    {% for item in results %}
+        <div class="input-group"  style="  display: flex;">
+			<span class="input-group-addon" style="flex: 1">{{ item.name }}</span>
+			<input type="text" class="form-control" placeholder="{{ item.name }}" style="flex: 3" name="{{ item.name }}">
+            <span class="input-group-addon" style="flex: 1">{{ item.type }}</span>
+		</div>
+        <br>
+    {% endfor %}
+</form>
+<button id="submit" type="button" class="btn btn-default" style="width: 50%">提交</button>
+</div>
+</body>
+<script>
+    $(function () {
+        $("#submit").click(function () {
+           alert($("#form1").serialize());
+        });
+    });
+
+
+</script>
+</html>

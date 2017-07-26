@@ -1,0 +1,5 @@
+mysql_add = 'localhost'
+mysql_user = 'root'
+mysql_pass = 'mn19940708'
+mysql_dataBase = 'information_schema'
+mysql_table = 'firstserver_userinfo'
