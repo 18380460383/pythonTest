@@ -84,7 +84,11 @@
                 beforeSend: function (xhr) {
                 },
                 success: function (data, textStatus, jqXHR) {
-                    layer.alert(JSON.stringify(data));
+                    if(data.code==10000){
+                        location.href = "/index/";
+                    }else{
+                        layer.alert(data.msg);
+                    }
                 },
                 error: function (xhr, textStatus) {
                     layer.alert("提交成功，您也可以联系管理员(827748115@qq.com)！" + JSON.stringify(xhr) + "\n" + textStatus);

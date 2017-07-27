@@ -28,7 +28,10 @@ def loginJ(request):
             cursor.execute(sql)
             # 获取所有记录列表
             result = cursor.fetchall()
-            re = RetrunBean.returnBean(1025, 'successs', result)
+            if len(result)>0:
+             re = RetrunBean.returnBean(10000, 'successs',None)
+            else:
+             re = RetrunBean.returnBean(10001, 'faile', None)
         except:
             print("Error: unable to fecth data")
         print(re)
