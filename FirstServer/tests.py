@@ -71,7 +71,6 @@ def get(request):
     lista=[]
     # 输出所有数据
     for var in list2:
-        #response1 += var.name + " "
         del var._state
 
     list3=list(list2)

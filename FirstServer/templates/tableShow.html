@@ -9,7 +9,8 @@
      <!-- 引入 Bootstrap -->
      <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
      <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
-      <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
       <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
     <title>MYSQL表列展示</title>
@@ -41,7 +42,7 @@
         $("#submit").click(function () {
            $.ajax({
 					type:"POST",
-				 	url:"/urlpost/",
+				 	url:"/table_name_post/",
 				 	async:true,
 				 	data:$("#form1").serialize(),
 					timeout : 5000, //超时时间
@@ -49,10 +50,10 @@
 					beforeSend : function(xhr) {
 					},
 					success : function(data, textStatus, jqXHR) {
-						alert(data);
+						layer.alert(JSON.stringify(data));
 					},
 					error : function(xhr, textStatus) {
-						alert("提交成功，您也可以联系管理员(827748115@qq.com)！"+JSON.stringify(xhr)+"\n"+textStatus);
+						layer.alert("提交成功，您也可以联系管理员(827748115@qq.com)！"+JSON.stringify(xhr)+"\n"+textStatus);
 					},
 					complete : function() {
 					}
