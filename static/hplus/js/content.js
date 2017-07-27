@@ -33,6 +33,6 @@ if ($(".tooltip-demo").tooltip({
         var o = $(this).closest("div.ibox");
         o.remove()
     }), top == this) {
-    var gohome = '<div class="gohome" style="display: none"><a class="animated bounceInUp" href="index.html?v=4.0" title="" ><i class="fa fa-home"></i></a></div>';
+    var gohome = '<div class="gohome" style="display: none"><a class="animated bounceInUp" href="index_home.html?v=4.0" title="" ><i class="fa fa-home"></i></a></div>';
   /*  $("body").append(gohome)*/
 }

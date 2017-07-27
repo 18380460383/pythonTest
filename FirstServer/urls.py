@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from FirstServer import tests,tests1,mapshow,mapcanvas,md5encode,pyton_get_or_post,mysqlEx,mysql_table_show,tst_post,table_name_post,hplus_show,mysql_index
-
+from FirstServer.login import login
 urlpatterns = [
+    url(r'^login/', login.test,name='login'),
+    url(r'^login_post/', login.loginJ,name='login_post'),
     url(r'^index/', mysql_index.test,name='index'),
     url(r'^blog/', tests.test,name='blog'),
     url(r'^admin/', admin.site.urls),
