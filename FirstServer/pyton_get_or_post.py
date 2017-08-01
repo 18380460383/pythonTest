@@ -12,6 +12,13 @@ def test(request):
     if not str.strip():
         str = 'name is empty'
     return HttpResponse(str)
+def testP(request):
+    str = ''
+    if request.POST:
+        str = request.POST['name']
+    if not str.strip():
+        str = 'name is empty'
+    return HttpResponse(str)
 def testPost(request):
     str = ''
     par = {}

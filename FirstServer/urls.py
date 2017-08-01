@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from FirstServer import tests,tests1,mapshow,mapcanvas,md5encode,pyton_get_or_post,mysqlEx,mysql_table_show,tst_post,table_name_post,hplus_show,mysql_index
+from FirstServer import tests,tests1,mapshow,mapcanvas,md5encode,pyton_get_or_post,mysqlEx,mysql_table_show,tst_post,table_name_post,hplus_show,\
+    mysql_index,upfile
 from FirstServer.login import login
 urlpatterns = [
     url(r'^login/', login.test,name='login'),
@@ -31,10 +32,12 @@ urlpatterns = [
     url(r'^mapcanvas/', mapcanvas.test,name='mapcanvas'),
     url(r'^md5/', md5encode.test,name='md5'),
     url(r'^urlget/', pyton_get_or_post.test,name='urlget'),
+    url(r'^urlpostp', pyton_get_or_post.testP,name='urlpostp'),
     url(r'^urlpost/', pyton_get_or_post.testPost,name='urlpost'),
     url(r'^tstpost/', tst_post.search_post,name='tstpost'),
     url(r'^mysql/', mysqlEx.show,name='mysqlEx'),
     url(r'^mysql_table/', mysql_table_show.show,name='mysql_table'),
     url(r'^table_name_post/', table_name_post.testPost,name='table_name_post'),
     url(r'^hplus/', hplus_show.test,name='hplus'),
+    url(r'^upfile/', upfile.upload_file,name='upfile'),
 ]
