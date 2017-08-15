@@ -30,7 +30,7 @@ import pymysql
 
 
 from FirstServer.models import userinfo
-
+from FirstServer.modle import TstBean
 
 def insert(request):
     userinfo1 = userinfo(1, '测试', '123@126.com', '测试')
@@ -71,11 +71,10 @@ def get(request):
     lista=[]
     # 输出所有数据
     for var in list2:
-        #response1 += var.name + " "
         del var._state
 
     list3=list(list2)
-    re = RetrunBean.returnBean(1025, 'successs', list3)
+    re = RetrunBean.returnBean(1025, 'successs', TstBean.tstbean(231,'测试','326@126.com','omo'))
     #print(re.convert_to_dict())
     print(list3)
     str_m = json.dumps(re, default=modleconver.convert_to_builtin_type)

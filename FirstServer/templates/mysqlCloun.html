@@ -3,47 +3,83 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-     <!-- 引入jQuery -->
+    <!-- 引入jQuery -->
     <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-     <!-- 引入 Bootstrap -->
-     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
-     <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
-      <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <!-- 引入 Bootstrap -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
     <title>MYSQL表列展示</title>
     <style>
         .flex-item {
-    width: 50%;
-    height: 75px;
-    margin: auto;
+            width: 50%;
+            height: 75px;
+            margin: auto;
             margin-top: 50px;
-}
+        }
     </style>
 </head>
 <body align="center">
 <div class="flex-item">
-<form id="form1">
-    {% for item in results %}
-        <div class="input-group"  style="  display: flex;">
-			<span class="input-group-addon" style="flex: 1">{{ item.name }}</span>
-			<input type="text" class="form-control" placeholder="{{ item.name }}" style="flex: 3" name="{{ item.name }}">
-            <span class="input-group-addon" style="flex: 1">{{ item.type }}</span>
-		</div>
-        <br>
-    {% endfor %}
-</form>
-<button id="submit" type="button" class="btn btn-default" style="width: 50%">提交</button>
+
+    <h3>待操作的表为：{{ table_name }}</h3>
+
+    <form id="form1">
+        {% for item in results %}
+            <div class="input-group" style="  display: flex;">
+                <span class="input-group-addon" style="flex: 1">{{ item.name }}</span>
+                <input type="text" class="form-control" placeholder="{{ item.name }}" style="flex: 3"
+                       name="{{ item.name }}">
+                <span class="input-group-addon" style="flex: 1">{{ item.type }}</span>
+
+                {% ifequal item.null_able|lower   'yes' %}
+                    <span class="input-group-addon" style="flex: 1 ;color: #ff0000;">
+                    * 必填项目
+                     </span>
+                {% else %}
+                    <span class="input-group-addon" style="flex: 1 ;color: #ff0000;">
+                    可为空
+                     </span>
+                {% endifequal %}
+
+            </div>
+            <br>
+        {% endfor %}
+    </form>
+    <button id="submit" type="button" class="btn btn-default" style="width: 50%">提交</button>
+    <button id="button" type="button" class="btn btn-default" style="width: 50%">重置</button>
 </div>
 </body>
 <script>
     $(function () {
         $("#submit").click(function () {
-           alert($("#form1").serialize());
+            alert($("#form1").serialize());
+            $.ajax({
+                type: "POST",
+                url: "/urlpost/",
+                async: true,
+                data: $("#form1").serialize(),
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+                },
+                success: function (data, textStatus, jqXHR) {
+                    layer.alert(JSON.stringify(data));
+                },
+                error: function (xhr, textStatus) {
+                    layer.alert("提交成功，您也可以联系管理员(827748115@qq.com)！" + JSON.stringify(xhr) + "\n" + textStatus);
+                },
+                complete: function () {
+                }
+            });
+        });
+        $("#button").click(function () {
+            $("#form1 :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");//核心
         });
     });
-
-
 </script>
 </html>

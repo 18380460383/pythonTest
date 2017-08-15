@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-import MySQLdb
 from FirstServer import mysqlconfig,mysqlcolunm,Constant
 from django.shortcuts import render
 import json
@@ -17,7 +16,7 @@ def show(request):
         myc=mysqlconfig.mysqlCon("localhost","root","mn19940708",Constant.mysql_dataBase )
         cursor=myc.openInformation()
         # SQL 查询语句
-        sql = "select column_name,COLUMN_TYPE from information_schema.columns where table_schema='python' and table_name='"+Constant.mysql_table+"'"
+        sql = "select column_name,COLUMN_TYPE,IS_NULLABLE from information_schema.columns where table_schema='python' and table_name='"+Constant.mysql_table+"'"
         results=[]
         try:
            # 执行SQL语句
@@ -28,11 +27,13 @@ def show(request):
                re={}
                re['name']=row[0]
                re['type']=row[1]
+               re['null_able']=row[2]
                results.append(re)
         except:
            print ("Error: unable to fecth data")
         print(results)
         # 关闭数据库连接
         myc.db.close()
+        context['table_name']=Constant.mysql_table
         context['results']=results
         return render(request, 'mysqlCloun.html',context)

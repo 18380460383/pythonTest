@@ -18,7 +18,7 @@ class mysqlCon(object):
     # 打开数据库连接
     def openInformation(self):
         if mysqlCon.__instance is None:
-            self.db = MySQLdb.connect(self.mysql_add, self.mysql_user, self.mysql_pass, self.mysql_dataBase)
+            self.db = MySQLdb.connect(self.mysql_add, self.mysql_user, self.mysql_pass, self.mysql_dataBase,charset="utf8")
             # 使用cursor()方法获取操作游标
         self.cursor = self.db.cursor()
         return self.cursor
